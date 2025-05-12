@@ -1,0 +1,31 @@
+import json
+import os
+
+DATA_FILE = 'accounts.json'
+
+def load_accounts():
+    if not os.path.exists(DATA_FILE):
+        return {}
+    with open(DATA_FILE, 'r') as f:
+        return json.load(f)
+
+def save_accounts(accounts):
+    with open(DATA_FILE, 'w') as f:
+        json.dump(accounts, f, indent=4)
+
+def create_account(accounts, username):
+    if username in accounts:
+        print(f"Account for '{username}' already exists.")
+    else:
+        accounts[username] = 0
+        print(f"Account for '{username}' created.")
+
+def deposit(accounts, username, amount):
+    if username in accounts:
+        accounts[username] += amount
+        print(f"Deposited ${amount} to '{username}' account.")
+    else:
+        print(f"Account '{username}' does not exist.")
+
+def withdraw(accounts, username, amount):
+    if username in
